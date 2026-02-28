@@ -1,0 +1,78 @@
+{
+  "features": {
+    "crmSync": {
+      "enabled": true,
+      "label": "CRM Live Sync"
+    },
+    "aiSequencing": {
+      "enabled": true,
+      "label": "AI Email Sequencing"
+    },
+    "autoApproveEmails": {
+      "enabled": true,
+      "label": "Auto-Approve Outbound Emails"
+    },
+    "useRepositoryEmbeddings": {
+      "enabled": true,
+      "label": "Vectorize Internal Case Studies"
+    }
+  },
+  "buttons": {
+    "action_generate_campaign": {
+      "label": "Auto-Generate AI Copy",
+      "visible": true,
+      "enabled": true,
+      "endpoint": "/api/actions/generate",
+      "method": "POST",
+      "payloadMapping": [
+        "campaignId",
+        "leadId"
+      ],
+      "successMessage": "Email variation generated successfully.",
+      "errorMessage": "Failed to generate AI content.",
+      "uiStyle": "primary"
+    },
+    "action_send_email": {
+      "label": "Dispatch Email Now",
+      "visible": true,
+      "enabled": true,
+      "endpoint": "/api/actions/send",
+      "method": "POST",
+      "payloadMapping": [
+        "leadEmail",
+        "subject",
+        "body"
+      ],
+      "successMessage": "Email dispatched to SMTP successfully!",
+      "errorMessage": "Failed to send email. Check SMTP settings.",
+      "uiStyle": "accent"
+    },
+    "action_schedule_email": {
+      "label": "Schedule Campaign",
+      "visible": true,
+      "enabled": true,
+      "endpoint": "/api/actions/schedule",
+      "method": "POST",
+      "payloadMapping": [
+        "campaignId",
+        "datetime"
+      ],
+      "successMessage": "Campaign scheduled successfully.",
+      "errorMessage": "Failed to schedule.",
+      "uiStyle": "outline"
+    },
+    "action_force_sync": {
+      "label": "Force CRM Re-Sync",
+      "visible": true,
+      "enabled": true,
+      "endpoint": "/api/actions/sync",
+      "method": "POST",
+      "payloadMapping": [
+        "sourceId"
+      ],
+      "successMessage": "Sync requested.",
+      "errorMessage": "Sync failed.",
+      "uiStyle": "outline"
+    }
+  }
+}
