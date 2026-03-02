@@ -1,43 +1,46 @@
 const nodemailer = require('nodemailer');
 
 const sendOutboundEmail = async (to, subject, body) => {
+    console.log(`>>> EMAIL SERVICE CALLED: To=${to}, Subject=${subject}`);
     try {
-        console.log(`Preparing to send email to ${to}...`);
 
         // Ethereal is a free dummy SMTP service for development and testing.
         // It catches emails instead of sending them to real inboxes, ensuring we don't spam.
         // For production, this gets replaced by standard SMTP (SendGrid, Outlook, Gmail, etc.)
 
-        // 1. Generate a test account (only needed if you don't provide your own credentials)
-        let testAccount = await nodemailer.createTestAccount();
+        // Check if environment variables are set. If not, fallback to Ethereal but log a warning.
+        const isDefaultConfig = !process.env.SMTP_USER || process.env.SMTP_USER === 'your-email@gmail.com';
 
-        // 2. Create the transporter using either ENV vars or the test account
+        if (isDefaultConfig) {
+            console.warn('WARNING: Missing SMTP configuration in .env - falling back to Ethereal dummy service.');
+        }
+
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST || 'smtp.ethereal.email',
-            port: process.env.SMTP_PORT || 587,
-            secure: process.env.SMTP_SECURE === 'true' || false,
+            port: Number(process.env.SMTP_PORT) || 587,
+            secure: process.env.SMTP_SECURE === 'true',
             auth: {
-                user: process.env.SMTP_USER || testAccount.user,
-                pass: process.env.SMTP_PASS || testAccount.pass,
+                user: process.env.SMTP_USER || (await nodemailer.createTestAccount()).user,
+                pass: process.env.SMTP_PASS || (await nodemailer.createTestAccount()).pass,
             },
         });
 
-        // 3. Send the email
         const mailOptions = {
-            from: process.env.EMAIL_FROM || '"Aura AI Sales" <alex@aura-ai.io>',
+            from: process.env.EMAIL_FROM || '"Aura AI Sales" <noreply@aura-ai.io>',
             to: to,
             subject: subject,
-            text: body, // Plain text body
-            html: `<p>${body.replace(/\n/g, '<br>')}</p>`, // Basic HTML conversion for convenience
+            text: body,
+            html: `<p>${body.replace(/\n/g, '<br>')}</p>`,
         };
 
         const info = await transporter.sendMail(mailOptions);
 
-        console.log(`Email Sent Successfully! Message ID: ${info.messageId}`);
+        console.log(`Email Dispatched! Message ID: ${info.messageId}`);
 
-        // If using the dummy Ethereal service, it provides a URL to view the sent email
-        if (!process.env.SMTP_HOST) {
-            console.log(`View your fake delivered email here: ${nodemailer.getTestMessageUrl(info)}`);
+        if (isDefaultConfig) {
+            const previewUrl = nodemailer.getTestMessageUrl(info);
+            console.log(`View your dummy delivered email here: ${previewUrl}`);
+            return { success: true, dummy: true, previewUrl };
         }
 
         return { success: true };

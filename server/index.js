@@ -6,7 +6,7 @@ const configRoutes = require('./routes/config');
 const actionRoutes = require('./routes/actions');
 const leadsRoutes = require('./routes/leads');
 
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 // Initialize database on startup
 require('./database');

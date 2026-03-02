@@ -71,8 +71,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                         M
                     </div>
                     <div style={{ overflow: 'hidden' }}>
-                        <p style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0f172a', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Mithun</p>
-                        <p style={{ fontSize: '0.7rem', color: '#64748b', margin: 0 }}>mithunshri2005@gmail.com</p>
+                        <p style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0f172a', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>mithun</p>
+                        <p style={{ fontSize: '0.7rem', color: '#64748b', margin: 0 }}>mithunuser2525@gmail.com</p>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ const configPath = path.join(__dirname, '../ui-config.json');
 router.post('/:actionKey', async (req, res) => {
     const { actionKey } = req.params;
     const payload = req.body;
+    console.log(`>>> ACTION ROUTE HIT: [${actionKey}] with payload:`, payload);
 
     try {
         // Read configuration to validate allowed actions

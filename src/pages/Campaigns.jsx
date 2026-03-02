@@ -7,7 +7,7 @@ const Campaigns = ({ leads = [] }) => {
     const [selectedCampaign, setSelectedCampaign] = useState(campaignData[0]);
     const [selectedLeadIndex, setSelectedLeadIndex] = useState(0);
 
-    const defaultBody = `Hi {firstName},\n\nI noticed {company} has been scaling your cloud infrastructure rapidly recently. Often, this leads to complex, runaway AWS costs that pull your engineering team away from product development.\n\n*** AI Injected Context from Repository (Cloud Cost Use-case) ***\nWe recently helped a similar Enterprise SaaS company reduce their monthly AWS bill by 34% within 60 days, purely through automated orchestration—requiring zero code changes from their engineering team.\n\nGiven you're currently leading the efforts at {company}, would you be open to a brief chat next week to see how this framework could apply to your current setup?\n\nBest,\nMithun\nmithunshri2005@gmail.com`;
+    const defaultBody = `Hi {firstName},\n\nI noticed {company} has been scaling your cloud infrastructure rapidly recently. Often, this leads to complex, runaway AWS costs that pull your engineering team away from product development.\n\n*** AI Injected Context from Repository (Cloud Cost Use-case) ***\nWe recently helped a similar Enterprise SaaS company reduce their monthly AWS bill by 34% within 60 days, purely through automated orchestration—requiring zero code changes from their engineering team.\n\nGiven you're currently leading the efforts at {company}, would you be open to a brief chat next week to see how this framework could apply to your current setup?\n\nBest,\nmithun\nmithunuser2525@gmail.com`;
 
     const [emailBody, setEmailBody] = useState('');
 
@@ -147,7 +147,7 @@ const Campaigns = ({ leads = [] }) => {
                     <div className="flex flex-col flex-1 bg-white">
                         <div className="p-4 bg-slate-50 border-b border-slate-200">
                             <div className="flex mb-2"><span className="w-20 text-secondary text-sm">To:</span> <span className="font-medium text-slate-800 text-sm">{leads[selectedLeadIndex]?.email || 'No target selected'}</span></div>
-                            <div className="flex mb-2"><span className="w-20 text-secondary text-sm">From:</span> <span className="font-medium text-slate-800 text-sm">Mithun &lt;mithunshri2005@gmail.com&gt;</span></div>
+                            <div className="flex mb-2"><span className="w-20 text-secondary text-sm">From:</span> <span className="font-medium text-slate-800 text-sm">mithun &lt;mithunuser2525@gmail.com&gt;</span></div>
                             <div className="flex"><span className="w-20 text-secondary text-sm">Subject:</span> <span className="font-medium text-slate-800 text-sm">Reducing {leads[selectedLeadIndex]?.company || 'your company'}'s AWS spend without engineering overhead</span></div>
                         </div>
 

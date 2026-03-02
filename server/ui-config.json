@@ -9,7 +9,7 @@
       "label": "AI Email Sequencing"
     },
     "autoApproveEmails": {
-      "enabled": true,
+      "enabled": false,
       "label": "Auto-Approve Outbound Emails"
     },
     "useRepositoryEmbeddings": {
