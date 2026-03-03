@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+
+const API_BASE = import.meta.env.VITE_API_URL || '';
 import Dashboard from './pages/Dashboard';
 import DataIngestion from './pages/DataIngestion';
 import Segmentation from './pages/Segmentation';
@@ -14,7 +16,7 @@ function App() {
 
   // Load leads from database on startup
   useEffect(() => {
-    fetch('/api/customers')
+    fetch(`${API_BASE}/api/customers`)
       .then(r => r.json())
       .then(data => setGlobalLeads(Array.isArray(data) ? data : []))
       .catch(() => { }); // Backend offline — leads start empty

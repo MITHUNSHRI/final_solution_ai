@@ -49,7 +49,7 @@ const AdminSettings = () => {
         setSaving(true);
         setSaveStatus(null);
         try {
-            const response = await fetch('/api/config', {
+            const response = await fetch(`${API_BASE}/api/config`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(localConfig)

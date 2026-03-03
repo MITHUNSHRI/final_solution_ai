@@ -30,7 +30,7 @@ const Leads = ({ leads, setLeads }) => {
         try {
             if (editingLead) {
                 // UPDATE existing customer in database
-                const res = await fetch(`/api/customers/${editingLead.id}`, {
+                const res = await fetch(`${API_BASE}/api/customers/${editingLead.id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -41,7 +41,7 @@ const Leads = ({ leads, setLeads }) => {
                 }
             } else {
                 // CREATE new customer in database
-                const res = await fetch('/api/customers', {
+                const res = await fetch(`${API_BASE}/api/customers`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ...formData, matchScore: Math.floor(Math.random() * 20) + 75 })
@@ -71,7 +71,7 @@ const Leads = ({ leads, setLeads }) => {
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this customer?')) return;
         try {
-            await fetch(`/api/customers/${id}`, { method: 'DELETE' });
+            await fetch(`${API_BASE}/api/customers/${id}`, { method: 'DELETE' });
         } catch {
             // Offline — just remove from local state
         }

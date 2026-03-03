@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useUIConfig } from '../context/UIConfigContext';
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
+// base URL for API; VITE_API_URL is set in production, empty in dev (proxy handles it)
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 // A completely configuration-driven button
 const DynamicActionBtn = ({ actionKey, payload = {}, onComplete = () => { }, className = "", children }) => {
     const { config, loading: configLoading } = useUIConfig();
@@ -23,7 +26,7 @@ const DynamicActionBtn = ({ actionKey, payload = {}, onComplete = () => { }, cla
         setMessage('');
 
         try {
-            const response = await fetch(`/api/actions/${actionKey}`, {
+            const response = await fetch(`${API_BASE}/api/actions/${actionKey}`, {
                 method: actionConfig.method || 'POST',
                 headers: {
                     'Content-Type': 'application/json',
