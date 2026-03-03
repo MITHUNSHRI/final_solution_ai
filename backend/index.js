@@ -26,6 +26,6 @@ app.use('/api/actions', actionRoutes);
 // Customer / Leads Database CRUD API
 app.use('/api/customers', leadsRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Backend Server running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Backend Server running on port ${PORT} (0.0.0.0)`);
 });
