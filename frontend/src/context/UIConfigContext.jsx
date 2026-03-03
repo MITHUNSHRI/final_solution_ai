@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 // Default configuration used if backend is offline
 const DEFAULT_CONFIG = {
     features: {

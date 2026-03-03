@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useUIConfig } from '../context/UIConfigContext';
 import { Settings, Save, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 const AdminSettings = () => {
     const { config, reloadConfig, loading } = useUIConfig();
     const [localConfig, setLocalConfig] = useState(null);

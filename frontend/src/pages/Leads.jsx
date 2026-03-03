@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Contact, Edit2, Plus, Search, Mail, Building, Trash2 } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 const Leads = ({ leads, setLeads }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingLead, setEditingLead] = useState(null);
