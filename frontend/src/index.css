@@ -222,6 +222,22 @@ h6 {
   gap: 2rem;
 }
 
+@media (max-width: 1400px) {
+  .gap-8 {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .gap-8 {
+    gap: 1rem;
+  }
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
 .grid {
   display: grid;
 }

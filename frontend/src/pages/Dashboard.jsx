@@ -39,15 +39,15 @@ const Dashboard = () => {
                     </div>
                     <div className="flex flex-col gap-4">
                         {campaignData.map(campaign => (
-                            <div key={campaign.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between hover:bg-white/10 transition-colors">
-                                <div className="flex flex-col gap-1 w-1/3">
+                            <div key={campaign.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between hover:bg-white/10 transition-colors overflow-hidden">
+                                <div className="flex flex-col gap-1 w-1/3 min-w-0">
                                     <span className="font-medium text-sm text-primary-50 truncate">{campaign.name}</span>
                                     <span className={`badge w-fit ${campaign.status === 'Active' ? 'badge-success' : campaign.status === 'Scheduled' ? 'badge-warning' : 'badge-primary'}`}>
                                         {campaign.status}
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-8 w-1/2">
+                                <div className="flex items-center gap-8 w-1/2 justify-center">
                                     <div className="flex flex-col items-center">
                                         <span className="text-xs text-secondary">Sent</span>
                                         <span className="font-semibold">{campaign.sent}</span>
