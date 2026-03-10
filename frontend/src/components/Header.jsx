@@ -1,7 +1,11 @@
 import React from 'react';
 import { Bell, Search } from 'lucide-react';
+import { useUIConfig } from '../context/UIConfigContext';
 
 const Header = ({ title }) => {
+    const { config } = useUIConfig();
+    const btnConfig = config?.buttons?.action_new_campaign || { label: '+ New Campaign', visible: true, uiStyle: 'primary' };
+
     return (
         <header className="flex items-center justify-between px-8 py-6 glass" style={{ borderTop: 'none', borderLeft: 'none', borderRight: 'none', borderRadius: 0, zIndex: 10 }}>
             <div>
@@ -30,9 +34,11 @@ const Header = ({ title }) => {
                         <span className="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span>
                     </button>
 
-                    <button className="btn btn-primary">
-                        + New Campaign
-                    </button>
+                    {btnConfig.visible && (
+                        <button className={`btn btn-${btnConfig.uiStyle || 'primary'}`}>
+                            {btnConfig.label}
+                        </button>
+                    )}
                 </div>
             </div>
         </header>

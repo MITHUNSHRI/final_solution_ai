@@ -73,6 +73,17 @@
       "successMessage": "Sync requested.",
       "errorMessage": "Sync failed.",
       "uiStyle": "outline"
+    },
+    "action_new_campaign": {
+      "label": "+ New Campaign",
+      "visible": true,
+      "enabled": true,
+      "endpoint": "/api/actions/new_campaign",
+      "method": "POST",
+      "payloadMapping": [],
+      "successMessage": "Campaign wizard opened.",
+      "errorMessage": "Failed to open wizard.",
+      "uiStyle": "primary"
     }
   }
 }

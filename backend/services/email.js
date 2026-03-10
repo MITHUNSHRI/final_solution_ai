@@ -33,9 +33,9 @@ const sendOutboundEmail = async (to, subject, body) => {
             html: `<p>${body.replace(/\n/g, '<br>')}</p>`,
         };
 
+        console.log('Attempting to send email...');
         const info = await transporter.sendMail(mailOptions);
-
-        console.log(`Email Dispatched! Message ID: ${info.messageId}`);
+        console.log('Email sent successfully:', info.messageId);
 
         if (isDefaultConfig) {
             const previewUrl = nodemailer.getTestMessageUrl(info);

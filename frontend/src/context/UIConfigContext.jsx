@@ -14,7 +14,8 @@ const DEFAULT_CONFIG = {
         action_generate_campaign: { label: 'Auto-Generate AI Copy', visible: true, enabled: true, endpoint: '/api/actions/action_generate_campaign', method: 'POST', successMessage: 'Generated!', errorMessage: 'Failed.', uiStyle: 'primary' },
         action_send_email: { label: 'Dispatch Email Now', visible: true, enabled: true, endpoint: '/api/actions/action_send_email', method: 'POST', successMessage: 'Email sent!', errorMessage: 'Send failed.', uiStyle: 'accent' },
         action_schedule_email: { label: 'Schedule Campaign', visible: true, enabled: true, endpoint: '/api/actions/action_schedule_email', method: 'POST', successMessage: 'Scheduled!', errorMessage: 'Failed.', uiStyle: 'outline' },
-        action_force_sync: { label: 'Force CRM Re-Sync', visible: true, enabled: true, endpoint: '/api/actions/action_force_sync', method: 'POST', successMessage: 'Sync requested.', errorMessage: 'Sync failed.', uiStyle: 'outline' }
+        action_force_sync: { label: 'Force CRM Re-Sync', visible: true, enabled: true, endpoint: '/api/actions/action_force_sync', method: 'POST', successMessage: 'Sync requested.', errorMessage: 'Sync failed.', uiStyle: 'outline' },
+        action_new_campaign: { label: '+ New Campaign', visible: true, enabled: true, endpoint: '/api/actions/new_campaign', method: 'POST', successMessage: 'Success!', errorMessage: 'Failed.', uiStyle: 'primary' }
     }
 };
 
