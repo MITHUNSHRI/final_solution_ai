@@ -8,12 +8,9 @@ const DataIngestion = () => {
             <div className="flex justify-between items-center bg-indigo-500/10 border border-indigo-500/20 p-6 rounded-xl">
                 <div className="flex flex-col gap-2">
                     <h3 className="text-xl font-bold text-indigo-100">Data Connections</h3>
-                    <p className="text-sm text-indigo-300">Connect your CRM (Salesforce, HubSpot) and Internal Case Studies & Solutions repositories.</p>
                 </div>
-                <button className="btn btn-primary">
-                    <Link size={16} /> Add New Source
-                </button>
             </div>
+
 
             <div className="grid grid-cols-2 gap-6">
 
