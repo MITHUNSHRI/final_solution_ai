@@ -1,7 +1,7 @@
 {
   "features": {
     "crmSync": {
-      "enabled": true,
+      "enabled": false,
       "label": "CRM Live Sync"
     },
     "aiSequencing": {

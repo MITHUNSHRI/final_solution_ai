@@ -8,36 +8,44 @@ const sendOutboundEmail = async (to, subject, body) => {
         // It catches emails instead of sending them to real inboxes, ensuring we don't spam.
         // For production, this gets replaced by standard SMTP (SendGrid, Outlook, Gmail, etc.)
 
-        // Check if environment variables are set. If not, fallback to Ethereal but log a warning.
-        const isDefaultConfig = !process.env.SMTP_USER || process.env.SMTP_USER === 'your-email@gmail.com';
+        // Improved validation and robustness
+        const smtpHost = (process.env.SMTP_HOST || 'smtp.ethereal.email').trim();
+        const smtpPort = Number(process.env.SMTP_PORT) || 587;
+        const smtpSecure = process.env.SMTP_SECURE === 'true';
+        const smtpUser = (process.env.SMTP_USER || '').trim();
+        const smtpPass = (process.env.SMTP_PASS || '').trim();
+
+        const isDefaultConfig = !smtpUser || smtpUser === 'your-email@gmail.com';
 
         if (isDefaultConfig) {
-            console.warn('WARNING: Missing SMTP configuration in .env - falling back to Ethereal dummy service.');
+            console.warn('WARNING: Using fallback/test SMTP account.');
         }
 
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.ethereal.email',
-            port: Number(process.env.SMTP_PORT) || 587,
-            secure: process.env.SMTP_SECURE === 'true',
+            host: smtpHost,
+            port: smtpPort,
+            secure: smtpSecure,
             auth: {
-                user: process.env.SMTP_USER || (await nodemailer.createTestAccount()).user,
-                pass: process.env.SMTP_PASS || (await nodemailer.createTestAccount()).pass,
+                user: smtpUser || (await nodemailer.createTestAccount()).user,
+                pass: smtpPass || (await nodemailer.createTestAccount()).pass,
             },
+            connectionTimeout: 10000, // 10 seconds timeout
+            greetingTimeout: 10000,
         });
 
         const mailOptions = {
-            from: process.env.EMAIL_FROM || '"Aura AI Sales" <noreply@aura-ai.io>',
+            from: process.env.EMAIL_FROM || `"Aura AI Sales" <${smtpUser || 'noreply@aura-ai.io'}>`,
             to: to,
             subject: subject,
             text: body,
             html: `<p>${body.replace(/\n/g, '<br>')}</p>`,
         };
 
-        console.log('Attempting to send email...');
+        console.log(`Connecting to SMTP: ${smtpHost}:${smtpPort} (Secure: ${smtpSecure})...`);
         const info = await transporter.sendMail(mailOptions);
         console.log('Email sent successfully:', info.messageId);
 
-        if (isDefaultConfig) {
+        if (isDefaultConfig && !smtpUser) {
             const previewUrl = nodemailer.getTestMessageUrl(info);
             console.log(`View your dummy delivered email here: ${previewUrl}`);
             return { success: true, dummy: true, previewUrl };
@@ -45,8 +53,11 @@ const sendOutboundEmail = async (to, subject, body) => {
 
         return { success: true };
     } catch (error) {
-        console.error('Failed to send email:', error);
-        return { success: false, error: 'SMTP connection failed. Check server logs.' };
+        console.error('CRITICAL SMTP ERROR:', error.message);
+        if (error.code === 'ECONNREFUSED') {
+            return { success: false, error: `Connection refused by ${process.env.SMTP_HOST}. Is the port/secure setting correct?` };
+        }
+        return { success: false, error: `Email failed: ${error.message}` };
     }
 };
 

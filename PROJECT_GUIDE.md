@@ -17,7 +17,7 @@ This project is an **AI-Powered Sales Intelligence Platform**. It manages leads,
 - **Campaigns**: Personalized email outreach.
 - **Data Ingestion**: Tools to import leads from various sources.
 
-## 4. Architecture & Data Flow
+## 4. Architecture & Data Flowcd 
 
 ### Database Schema (`server/database.js`)
 The database contains a `customers` table with:

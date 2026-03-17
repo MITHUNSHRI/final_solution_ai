@@ -34,11 +34,7 @@ const Header = ({ title }) => {
                         <span className="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span>
                     </button>
 
-                    {btnConfig.visible && (
-                        <button className={`btn btn-${btnConfig.uiStyle || 'primary'}`}>
-                            {btnConfig.label}
-                        </button>
-                    )}
+
                 </div>
             </div>
         </header>
